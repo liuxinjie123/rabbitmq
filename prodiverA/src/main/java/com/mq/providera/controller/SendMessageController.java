@@ -65,6 +65,19 @@ public class SendMessageController {
         return "ok";
     }
 
+    @GetMapping("/sendFanoutMessage")
+    public String sendFanoutMessage() {
+        MQObj obj = new MQObj();
+
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: testFanoutMessage ";
+
+        obj.setId(messageId);
+        obj.setData(messageData);
+        obj.setCreateTime(LocalDateTime.now());
+        rabbitTemplate.convertAndSend("fanoutExchange", null, obj);
+        return "ok";
+    }
 
 }
 

@@ -4,7 +4,7 @@ server:
 spring:
   #给项目来个名字
   application:
-    name: rabbitmq-consumerA
+    name: rabbitmq-consumerB
   #配置rabbitMq 服务器
   rabbitmq:
     host: 127.0.0.1
