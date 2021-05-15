@@ -37,5 +37,34 @@ public class SendMessageController {
         return "ok";
     }
 
+    @GetMapping("/sendTopicMessage1")
+    public String sendTopicMessage1() {
+        MQObj obj = new MQObj();
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: M A N ";
+
+        obj.setId(messageId);
+        obj.setData(messageData);
+        obj.setCreateTime(LocalDateTime.now());
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", obj);
+        return "ok";
+    }
+
+    @GetMapping("/sendTopicMessage2")
+    public String sendTopicMessage2() {
+        MQObj obj = new MQObj();
+
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: woman is all ";
+
+        obj.setId(messageId);
+        obj.setData(messageData);
+        obj.setCreateTime(LocalDateTime.now());
+
+        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", obj);
+        return "ok";
+    }
+
 
 }
+
