@@ -1,4 +1,4 @@
-package com.mq.consumera.controller;
+package com.mq.consumerb.controller;
 
 import com.mq.common.pojo.MQObj;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -11,6 +11,6 @@ public class TopicTotalReceiver {
 
     @RabbitHandler
     public void process(MQObj obj) {
-        System.out.println("TopicTotalReceiver A 消费者收到消息  : " + obj);
+        System.out.println("TopicTotalReceiver B 消费者收到消息  : " + obj);
     }
 }
