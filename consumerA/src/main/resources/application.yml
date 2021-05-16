@@ -13,7 +13,29 @@ spring:
     password: root
     #虚拟host 可以不设置,使用server默认host
     virtual-host: test01
+    # 消息确认配置项
 
+    # 确认消息已发送到交换机（Exchange）
+    publisher-confirm-type: correlated
+    # 确认消息已发送到队列（Queue）
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+  # mail
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: jackdream@163.com
+    password: WUTEBQQBOROKUVCT
+    from: jackdream@163.com
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 
 

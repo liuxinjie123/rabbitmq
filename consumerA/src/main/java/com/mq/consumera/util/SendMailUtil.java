@@ -1,4 +1,4 @@
-package com.mq.common.util;
+package com.mq.consumera.util;
 
 import com.mq.common.pojo.mail.Mail;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +36,7 @@ public class SendMailUtil {
             log.info(" mail, send success.");
             return true;
         } catch (Exception e) {
+            log.error(e.toString());
             log.error(" mail, send failure. to:{}, title:{}.", to, title);
             return false;
         }

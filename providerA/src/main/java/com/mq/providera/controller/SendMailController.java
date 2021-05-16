@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping(value = "/mail")
 @RestController
-public class MailSendController {
+public class SendMailController {
     @Autowired
     private MailProduceService produceService;
 
@@ -17,7 +17,7 @@ public class MailSendController {
     @GetMapping(value = "/send")
     public String send() {
         Mail mail = new Mail();
-        mail.setTo("1134005157");
+        mail.setTo("1134005157@qq.com");
         produceService.send(mail);
         return "SUCCESS";
     }

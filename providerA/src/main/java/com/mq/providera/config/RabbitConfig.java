@@ -42,6 +42,11 @@ public class RabbitConfig {
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
             @Override
             public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+                if (ack) {
+                    log.info(" send success to exchange.");
+                } else {
+                    log.info(" send failure to exchange.");
+                }
                 log.info("");
                 log.info("ConfirmCallback:     " + "相关数据：" + correlationData);
                 log.info("ConfirmCallback:     " + "确认情况：" + ack);
@@ -72,7 +77,7 @@ public class RabbitConfig {
      * @return
      */
     @Bean
-    public MessageConverter messageConverter() {
+    public Jackson2JsonMessageConverter converter() {
         return new Jackson2JsonMessageConverter();
     }
 

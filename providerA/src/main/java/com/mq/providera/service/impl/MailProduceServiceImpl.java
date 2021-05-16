@@ -1,12 +1,15 @@
 package com.mq.providera.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.mq.common.pojo.MessageHelper;
 import com.mq.common.pojo.mail.Mail;
 import com.mq.providera.config.MailRabbitConfig;
 import com.mq.providera.service.MailProduceService;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,7 +30,7 @@ public class MailProduceServiceImpl implements MailProduceService {
 
         // 发送消息到 rabbitMQ
         CorrelationData correlationData = new CorrelationData(id);
-        rabbitTemplate.convertAndSend(MailRabbitConfig.MAIL_EXCHANGE_NAME, MailRabbitConfig.MAIL_ROUTING_KEY_NAME, JSON.toJSONString(mail), correlationData);
+        rabbitTemplate.convertAndSend(MailRabbitConfig.MAIL_EXCHANGE_NAME, MailRabbitConfig.MAIL_ROUTING_KEY_NAME, MessageHelper.objToMsg(mail), correlationData);
         return true;
     }
 }
