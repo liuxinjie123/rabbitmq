@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.mq.common.pojo.MQObj;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+@Component
 @RabbitListener(queues = {"TestDirectQueue", "TestDirectQueue-2"})  //监听的队列名称 TestDirectQueue
 public class DirectReceiver {
     @RabbitHandler
