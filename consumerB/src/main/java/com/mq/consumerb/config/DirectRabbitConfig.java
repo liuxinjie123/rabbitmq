@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @Author : jack
- * @CreateTime : 2021-05-15
- */
 @Configuration
 public class DirectRabbitConfig {
     @Value("${queue.direct.name}")
