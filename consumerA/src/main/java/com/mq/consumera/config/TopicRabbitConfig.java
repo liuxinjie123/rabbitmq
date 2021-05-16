@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
  * 2.当 * (星号) 和 # (井号) 这两个特殊字符都未在绑定键中出现的时候，此时主题交换机就拥有的直连交换机的行为。
  * 3.所以主题交换机也就实现了扇形交换机的功能，和直连交换机的功能。
  */
-@Configuration
+//@Configuration
 public class TopicRabbitConfig {
     //绑定键
     public final static String man = "topic.man";

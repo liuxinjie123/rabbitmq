@@ -33,7 +33,7 @@ public class SendMessageController {
         obj.setCreateTime(LocalDateTime.now());
 
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
-        rabbitTemplate.convertAndSend(directExchangeName, directRouteKey, obj);
+        rabbitTemplate.convertAndSend(directExchangeName,directRouteKey, obj);
         return "ok";
     }
 
@@ -76,6 +76,37 @@ public class SendMessageController {
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
         rabbitTemplate.convertAndSend("fanoutExchange", null, obj);
+        return "ok";
+    }
+
+    /**
+     * 触发回调函数
+     * ① 消息推送到server，但是在server里找不到交换机
+     */
+    @GetMapping("/TestMessageAck")
+    public String TestMessageAck() {
+        MQObj obj = new MQObj();
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: non-existent-exchange test message ";
+
+        obj.setId(messageId);
+        obj.setData(messageData);
+        obj.setCreateTime(LocalDateTime.now());
+
+        rabbitTemplate.convertAndSend("non-existent-exchange", "TestDirectRouting", obj);
+        return "ok";
+    }
+
+    @GetMapping("/TestMessageAck2")
+    public String TestMessageAck2() {
+        MQObj obj = new MQObj();
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: lonelyDirectExchange test message ";
+
+        obj.setId(messageId);
+        obj.setData(messageData);
+        obj.setCreateTime(LocalDateTime.now());
+        rabbitTemplate.convertAndSend("lonelyDirectExchange", "TestDirectRouting", obj);
         return "ok";
     }
 

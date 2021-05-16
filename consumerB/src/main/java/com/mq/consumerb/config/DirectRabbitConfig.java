@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class DirectRabbitConfig {
     @Value("${queue.direct.name}")
     private String directQueueName;
@@ -31,18 +31,18 @@ public class DirectRabbitConfig {
         return new Queue(directQueueName,true);
     }
 
-    //Direct交换机 起名：TestDirectExchange
+    // Direct交换机 起名：TestDirectExchange
     @Bean
     DirectExchange TestDirectExchange() {
         //  return new DirectExchange("TestDirectExchange",true,true);
         return new DirectExchange(directExchangeName,true,false);
     }
 
-    //绑定  将队列和交换机绑定, 并设置用于匹配键：TestDirectRouting
-    @Bean
-    Binding bindingDirect() {
-        return BindingBuilder.bind(TestDirectQueue()).to(TestDirectExchange()).with(directRouteKey);
-    }
+    // 绑定  将队列和交换机绑定, 并设置用于匹配键：TestDirectRouting
+//    @Bean
+//    Binding bindingDirect() {
+//        return BindingBuilder.bind(TestDirectQueue()).to(TestDirectExchange()).with(directRouteKey);
+//    }
 
 
 

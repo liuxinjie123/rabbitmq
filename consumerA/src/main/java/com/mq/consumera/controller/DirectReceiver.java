@@ -6,7 +6,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@RabbitListener(queues = "TestDirectQueue")  //监听的队列名称 TestDirectQueue
+@RabbitListener(queues = {"TestDirectQueue", "TestDirectQueue2"})  //监听的队列名称 TestDirectQueue
 public class DirectReceiver {
     @RabbitHandler
     public void process(MQObj obj) {

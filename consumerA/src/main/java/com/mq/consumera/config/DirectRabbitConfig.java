@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * 然后当一个消息携带着路由值为X，这个消息通过生产者发送给交换机时，
  * 交换机就会根据这个路由值 X去寻找绑定值也是 X 的队列。
  */
-@Configuration
+//@Configuration
 public class DirectRabbitConfig {
     @Value("${queue.direct.name}")
     private String directQueueName;
@@ -46,10 +46,10 @@ public class DirectRabbitConfig {
     }
 
     //绑定  将队列和交换机绑定, 并设置用于匹配键：TestDirectRouting
-    @Bean
-    Binding bindingDirect() {
-        return BindingBuilder.bind(TestDirectQueue()).to(TestDirectExchange()).with(directRouteKey);
-    }
+//    @Bean
+//    Binding bindingDirect() {
+//        return BindingBuilder.bind(TestDirectQueue()).to(TestDirectExchange()).with(directRouteKey);
+//    }
 
 
 

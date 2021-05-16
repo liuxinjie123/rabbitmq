@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * 扇型交换机，这个交换机没有路由键概念，就算你绑了路由键也是无视的。
  * 这个交换机在接收到消息后，会直接转发到绑定到它上面的所有队列。
  */
-@Configuration
+//@Configuration
 public class FanoutRabbitConfig {
 
     /**
