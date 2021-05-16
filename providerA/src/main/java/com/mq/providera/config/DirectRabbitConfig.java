@@ -46,7 +46,7 @@ public class DirectRabbitConfig {
         //   return new Queue("TestDirectQueue",true,true,false);
 
         //一般设置一下队列的持久化就好,其余两个就是默认false
-        return new Queue(directQueueName + "2",true);
+        return new Queue(directQueueName + "-2",true);
     }
 
     //Direct交换机 起名：TestDirectExchange

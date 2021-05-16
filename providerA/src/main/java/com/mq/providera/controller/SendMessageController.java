@@ -1,5 +1,6 @@
 package com.mq.providera.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.mq.common.pojo.MQObj;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -33,7 +36,7 @@ public class SendMessageController {
         obj.setCreateTime(LocalDateTime.now());
 
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
-        rabbitTemplate.convertAndSend(directExchangeName,directRouteKey, obj);
+        rabbitTemplate.convertAndSend(directExchangeName, directRouteKey, JSON.toJSONString(obj));
         return "ok";
     }
 
@@ -46,7 +49,7 @@ public class SendMessageController {
         obj.setId(messageId);
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
-        rabbitTemplate.convertAndSend("topicExchange", "topic.man", obj);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", JSON.toJSONString(obj));
         return "ok";
     }
 
@@ -61,7 +64,7 @@ public class SendMessageController {
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
 
-        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", obj);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", JSON.toJSONString(obj));
         return "ok";
     }
 
@@ -75,7 +78,7 @@ public class SendMessageController {
         obj.setId(messageId);
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
-        rabbitTemplate.convertAndSend("fanoutExchange", null, obj);
+        rabbitTemplate.convertAndSend("fanoutExchange", null, JSON.toJSONString(obj));
         return "ok";
     }
 
@@ -93,7 +96,7 @@ public class SendMessageController {
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
 
-        rabbitTemplate.convertAndSend("non-existent-exchange", "TestDirectRouting", obj);
+        rabbitTemplate.convertAndSend("non-existent-exchange", "TestDirectRouting", JSON.toJSONString(obj));
         return "ok";
     }
 
@@ -106,7 +109,7 @@ public class SendMessageController {
         obj.setId(messageId);
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
-        rabbitTemplate.convertAndSend("lonelyDirectExchange", "TestDirectRouting", obj);
+        rabbitTemplate.convertAndSend("lonelyDirectExchange", "TestDirectRouting", JSON.toJSONString(obj));
         return "ok";
     }
 
