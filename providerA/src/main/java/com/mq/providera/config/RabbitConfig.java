@@ -1,5 +1,6 @@
 package com.mq.providera.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
  * ③消息推送到sever，交换机和队列啥都没找到
  * ④消息推送成功
  */
+@Slf4j
 @Configuration
 public class RabbitConfig {
 
@@ -39,20 +41,24 @@ public class RabbitConfig {
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
             @Override
             public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-                System.out.println("ConfirmCallback:     " + "相关数据：" + correlationData);
-                System.out.println("ConfirmCallback:     " + "确认情况：" + ack);
-                System.out.println("ConfirmCallback:     " + "原因：" + cause);
+                log.info("");
+                log.info("ConfirmCallback:     " + "相关数据：" + correlationData);
+                log.info("ConfirmCallback:     " + "确认情况：" + ack);
+                log.info("ConfirmCallback:     " + "原因：" + cause);
+                log.info("");
             }
         });
 
         rabbitTemplate.setReturnsCallback(new RabbitTemplate.ReturnsCallback() {
             @Override
             public void returnedMessage(ReturnedMessage returned) {
-                System.out.println("ReturnCallback:     " + "消息：" + returned.getMessage());
-                System.out.println("ReturnCallback:     " + "回应码：" + returned.getReplyCode());
-                System.out.println("ReturnCallback:     " + "回应信息：" + returned.getReplyText());
-                System.out.println("ReturnCallback:     " + "交换机：" + returned.getExchange());
-                System.out.println("ReturnCallback:     " + "路由键：" + returned.getRoutingKey());
+                log.info("");
+                log.info("ReturnCallback:     " + "消息：" + returned.getMessage());
+                log.info("ReturnCallback:     " + "回应码：" + returned.getReplyCode());
+                log.info("ReturnCallback:     " + "回应信息：" + returned.getReplyText());
+                log.info("ReturnCallback:     " + "交换机：" + returned.getExchange());
+                log.info("ReturnCallback:     " + "路由键：" + returned.getRoutingKey());
+                log.info("");
             }
         });
 

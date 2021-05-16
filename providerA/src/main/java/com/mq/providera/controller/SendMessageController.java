@@ -49,7 +49,7 @@ public class SendMessageController {
         obj.setId(messageId);
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
-        rabbitTemplate.convertAndSend("topicExchange", "topic.man", JSON.toJSONString(obj));
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", obj);
         return "ok";
     }
 
@@ -64,7 +64,7 @@ public class SendMessageController {
         obj.setData(messageData);
         obj.setCreateTime(LocalDateTime.now());
 
-        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", JSON.toJSONString(obj));
+        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", obj);
         return "ok";
     }
 
